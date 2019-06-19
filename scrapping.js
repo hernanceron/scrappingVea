@@ -11,7 +11,7 @@ async function scrapeRutas() {
         request(rutaPrincipal, function(err, resp, html) {
             if (!err){
                 const $ = cheerio.load(html);            
-                $('.g-img-prod').each(function(i,elem){
+                $('.Showcase__photo__link').each(function(i,elem){
                     if($(this).attr('href')){
                         var ruta = $(this).attr('href');
                         console.log(ruta);
@@ -29,3 +29,4 @@ async function scrapeRutas() {
 module.exports = {
     scrapeRutas
 }
+//scrapeRutas();

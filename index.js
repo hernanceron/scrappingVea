@@ -31,7 +31,7 @@ async function cargarProductos() {
     }
 
     let fecha = new Date();
-    let nomFile = fecha.getFullYear().toString() + (fecha.getMonth()+1).toString() + fecha.getDate().toString();
+    let nomFile = fecha.getFullYear().toString() + (fecha.getMonth()+1).toString().padStart(2,0) + fecha.getDate().toString().padStart(2,0);
     
     var xls = json2xls(arrProductos);
     nomFile = nomFile + '-vea.xlsx';

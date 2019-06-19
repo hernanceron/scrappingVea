@@ -3,6 +3,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 async function readProductos(ruta ) {
+  //console.log("Antes de iniciar");
   return new Promise(function(resolve,reject){
     request(ruta, function(err, resp, html) {
       if (!err){
@@ -14,10 +15,10 @@ async function readProductos(ruta ) {
         var precioOnline = $('strong.skuBestPrice').html();
         var imagen = $('#image-main').attr("src");
         let fecha = new Date();
-        let strFecha = fecha.getFullYear().toString() + (fecha.getMonth()+1).toString() + fecha.getDate().toString();
+        let strFecha = fecha.getFullYear().toString() + (fecha.getMonth()+1).toString().padStart(2,0) + fecha.getDate().toString().padStart(2,0);
         var obj = {fecha:strFecha,nombreProducto: nombreProducto, codigo: codigoProducto, marca: marca, rutaImagen : imagen,
                    precio : precioRegular, precioOferta: precioOnline};    
-       
+        console.log(JSON.stringify(obj));
         resolve(obj);
       }
     });
@@ -27,4 +28,4 @@ module.exports = {
   readProductos
 }
 
-//readProductos("https://www.plazavea.com.pe/panales-para-bebe-huggies-natural-care-talla-xg-paquete-42un/p");
+//readProductos("https://www.plazavea.com.pe/panal-para-bebe-bambo-nature-talla-rn/p");
